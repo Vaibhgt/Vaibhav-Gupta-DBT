@@ -1,0 +1,142 @@
+1. alter table orders add package_stat varchar(25);
+
+2. update orders set package_stat='not available';
+delete from customers where creditlimit=0.00;
+
+Edit->preferences->sql editor
+
+
+2. write select statement to achieve the following-
+1. select First_Name from customers where First_Name Like '%el%';
+
+2. select concat (First_Name,' ',Last_Name) as 'customer name', orders.customer_id ,order_id from customers, orders
+where orders.customer_id=customers.customer_id and Deliver='Shipped';
+
+3. select count(*)  from customers where creditLimit>50000;
+
+4.select orders.customer_id, concat(First_Name,' ',Last_Name) as name, order_id, deliver 
+from customers, orders 
+where orders.customer_id=customers.customer_id;
+
+5. select First_Name, Last_Name, creditLimit from customers order by creditLimit;
+
+6. 
+delimiter //
+create procedure order_day()
+begin
+ declare x int; 
+ declare y date;
+insert into tempp select customer_id,order_date into x ,y from orders;
+end; // 
+delimiter ;
+
+7.
+delimiter //
+create procedure customer_search()
+begin
+declare x varchar(20);
+declare y double;
+insert into tempp select First_Name, max(creditLimit)  into x, y from customers;
+end;//
+delimiter ;
+
+
+
+3.Write SELECT statements to achieve the following:-
+
+1.select EMPNO, ENAME from EMP;
+
+2.select * from EMP where JOB='CLERK' or JOB='MANAGER';
+
+3. select ENAME, JOB from EMP where DEPTNO = (select DEPTNO from EMP where ENAME='KING');
+
+4.select ENAME from EMP where month (HIREDATE) ='02';
+
+5. select ENAME from EMP order by DEPTNO desc;
+
+6.select EMPNO as NAME, ENAME as NUMBER from EMP;
+
+7.select ENAME from EMP where HIREDATE = last_day(hiredate);
+
+8. select ENAME from EMP where SAL = (select max(SAL) from EMP);
+
+9. select sum(SAL) from EMP where DEPTNO=10;
+
+10. select * from emp where JOB like '%T';
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+DBDA exam paper solution
+
+
+create table Employee (emp_id int primary key, name Varchar(25) not null, age int not null, 
+hobbies varchar(25) not null, salary int not null, address varchar(25) not null,
+zip int unique not null);
+
+insert into Employee values(1,'mohit',23,'dancing', 10000, 'Mumbai',500049);
+insert into Employee values(2,'aniket',27,'painting', 20000, 'mumbai',500149);
+insert into Employee values(3,'ajay',31,'singing', 35000, 'delhi',273008);
+insert into Employee values(4,'priyanka',42,'dancing', 55000, 'delhi',123876);
+insert into Employee values(5,'deepika',26,'dancing', 10000, 'delhi',500786);
+insert into Employee values(6,'saloni',28,'singing', 50000, 'Mumbai',400149);
+insert into Employee values(7,'yash',34,'photography', 40000, 'Mumbai',450049);
+insert into Employee values(8,'vinay',45,'painting', 70000, 'Mumbai',273006);
+
+
+create table Dept(dept_id int primary key, dept_name varchar(25), e_id int, 
+manager varchar(25));
+ALTER TABLE Orders
+ADD FOREIGN KEY (e_id) REFERENCES Persons(emp_id);
+
+insert into Dept values(1,'ec',8, 'virat');
+insert into Dept values(2,'cs',7, 'sachin');
+insert into Dept values(3,'it',6, 'rahul');
+insert into Dept values(4,'it',5, 'rahul');
+insert into Dept values(5,'cs',4, 'sachin');
+insert into Dept values(6,'ec',3, 'virat');
+insert into Dept values(7,'ec',2, 'virat');
+insert into Dept values(8,'ec',1, 'virat');
+
+1.select count(name) from employee;
+
+2.select distinct dept_name from dept;
+
+3. select min( salary) from employee;
+
+select max( salary) from employee;
+
+select avg(salary) from employee;
+
+select sum(salary) from employee;
+
+4. select salary as 'highest salary', hobbies from employee where salary=(select max(salary) from employee);
+
+5. select sum(salary) from employee where address = (('m%') or ('d%'));
+
+6. select emp_id, name, age, hobbies, salary, address, zip, dept_name from employee, dept
+where employee.emp_id=dept.e_id;
+
+7. select name, age from employee where age between 20 and 30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
